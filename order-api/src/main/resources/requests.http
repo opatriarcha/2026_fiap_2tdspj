@@ -1,0 +1,18 @@
+curl -X POST http://localhost:8080/api/orders \d
+-H "Content-Type: application/json" \d
+-d '{
+    "customerName":"Maria",
+    "status":"CREATED",
+    "items":[
+      {
+        "productName":"Notebook",
+        "quantity":1,
+        "unitPrice":4500.00
+      },
+      {
+        "productName":"Mouses",
+        "quantity":2,
+        "unitPrice":1000.00
+      }
+    ]
+  }'
