@@ -1,3 +1,125 @@
 spring:
   application:
-    name: backend
+    name: blog
+
+  datasource:
+    url: jdbc:h2:mem:blogdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 900000
+      pool-name: blogHikariConnectionPool
+#      auto-commit: true # NAO SE FAZ ESSA LAMA ABAIXO EM PRODUCAO
+
+  sql:
+    init:
+      schema-locations: classpath*:schema.sql
+      data-locations: classpath*:data.sql
+      mode: always
+
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: true
+        web-allow-others: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+
+  cache:
+    type: caffeine
+
+  main:
+    banner-mode: console
+
+  mvc:
+    servlet:
+      load-on-startup: 1
+    format:
+      date: yyyy-MM-dd
+      date-time: yyyy-MM-dd HH:mm:ss
+  web:
+    error:
+      include-binding-errors: always
+      include-stacktrace: always
+      include-message: always
+      include-exception: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    tagsSorter: alpha
+    operationsSorter: alpha
+    display-request-duration: true
+    filter: true
+    enabled: true
+  version: 1.0.0
+  info:
+    title: Product Management API
+    description: API for managing products with CRUD operations
+    version: 1.0.0
+    contact:
+      name: API Support
+      email: orlando.patriarcha@gmail.com
+    license:
+      name: Apache 2.0
+      url: https://www.apache.org/licenses/LICENSE-2.0
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      springframework:
+        jdbc:
+          core: TRACE
+        transaction: TRACE
+    br:
+      com:
+        fiap:
+          javaadv:
+            blog:
+            backend: DEBUG
+
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+
+  file:
+    name: application.log
+    path: logs
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
