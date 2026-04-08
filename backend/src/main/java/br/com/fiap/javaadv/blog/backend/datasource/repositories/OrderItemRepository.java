@@ -8,5 +8,5 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 public interface OrderItemRepository extends
         JpaRepository<OrderItem, OrderItemKey>,
         QuerydslPredicateExecutor<OrderItem>,
-        OrderRepositoryCustom{
+        OrderItemRepositoryCustom {
 }

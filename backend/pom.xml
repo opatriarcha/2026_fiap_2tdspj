@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-core</artifactId>
-			<version>${querydsl.version}</version>
+     		<version>${querydsl.version}</version>
 
 		</dependency>
 		<!-- END OF QUERYDSL DEPENDENCIES-->

@@ -15,9 +15,9 @@ public class Order {
 
     @EmbeddedId
     private @Getter @Setter OrderKey key;
-    private @Getter @Setter Double totalItemQuantity;
-    private @Getter @Setter Double totalProductsValue;
-    private @Getter @Setter Double totalTaxValue;
+    private @Getter @Setter Double totalQuantity;
+    private @Getter @Setter Double totalPrice;
+    private @Getter @Setter Double totalTax;
 
     @OneToMany( mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
