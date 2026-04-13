@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class Profile {
 
     @Id
