@@ -39,7 +39,7 @@ public class User extends Object{
     @Column( name = "PASSWORD", length = 20, nullable = false)
     private @Getter @Setter String password;
 
-    @OneToOne( mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne( mappedBy = "user")
     private @Getter @Setter Profile profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

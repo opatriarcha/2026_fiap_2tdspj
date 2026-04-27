@@ -2,6 +2,8 @@ package br.com.fiap.javaadv.blog.backend.services;
 
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.Profile;
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +22,7 @@ public interface ProfileService {
 
     void delete(UUID id);
 
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    @Transactional(propagation = Propagation.NEVER)
     List<Profile> fetchAll();
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
@@ -28,4 +30,7 @@ public interface ProfileService {
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     Profile findByUser(User user);
+
+    @Transactional(propagation = Propagation.NEVER)
+    Page<Profile> fetchAll(Pageable pageable);
 }

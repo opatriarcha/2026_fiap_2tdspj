@@ -4,6 +4,8 @@ import br.com.fiap.javaadv.blog.backend.datasource.repositories.ProfileRepositor
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.Profile;
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,10 +64,10 @@ public class ProfileServiceImp implements ProfileService {
         return this.profileRepository.findByUser( user );
     }
 
-
-
-
-
+    @Override
+    public Page<Profile> fetchAll(Pageable pageable) {
+        return this.profileRepository.findAll(pageable);
+    }
 
 
 }
