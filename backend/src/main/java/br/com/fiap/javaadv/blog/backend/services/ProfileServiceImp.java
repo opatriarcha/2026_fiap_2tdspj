@@ -27,13 +27,32 @@ public class ProfileServiceImp implements ProfileService {
     }
 
     @Override
-    public Profile update(Profile profile){
-        return this.profileRepository.save( profile );
+    public Optional<Profile>  update(UUID id, Profile profile){
+        if( this.profileRepository.existsById( id ) ){
+            Optional<Profile> aProfile = this.profileRepository.findById(id);
+            profile.setId(id);
+            this.profileRepository.save(profile);
+            return Optional.of(profile);
+        }
+        return Optional.empty();
     }
 
     @Override
-    public Profile partialUpdate(Profile profile){
-        return this.profileRepository.save( profile );
+    public Optional<Profile> partialUpdate(Profile profile){
+        Optional<Profile> fromDatabase = this.profileRepository.findById(profile.getId());
+        if(fromDatabase.isEmpty())
+            return fromDatabase;
+
+        if( profile.getUser() != null && !profile.getUser().equals(fromDatabase.get().getUser()))
+            fromDatabase.get().setUser(profile.getUser());
+
+        if(profile.getImagePath() != null && !profile.getImagePath().equals(fromDatabase.get().getImagePath()))
+            fromDatabase.get().setImagePath(profile.getImagePath());
+
+        if(profile.getBio() != null && !profile.getBio().equals(fromDatabase.get().getBio()))
+            fromDatabase.get().setBio(profile.getBio());
+
+        return Optional.of(this.profileRepository.save( fromDatabase.get()));
     }
 
     @Override
@@ -67,6 +86,11 @@ public class ProfileServiceImp implements ProfileService {
     @Override
     public Page<Profile> fetchAll(Pageable pageable) {
         return this.profileRepository.findAll(pageable);
+    }
+
+    @Override
+    public boolean existsById(UUID id){
+        return this.profileRepository.existsById(id);
     }
 
 

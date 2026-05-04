@@ -14,9 +14,9 @@ import java.util.UUID;
 public interface ProfileService {
     Profile create(Profile profile);
 
-    Profile update(Profile profile);
+    public Optional<Profile>  update(UUID id, Profile profile);
 
-    Profile partialUpdate(Profile profile);
+    Optional<Profile> partialUpdate(Profile profile);
 
     void delete(Profile profile);
 
@@ -33,4 +33,7 @@ public interface ProfileService {
 
     @Transactional(propagation = Propagation.NEVER)
     Page<Profile> fetchAll(Pageable pageable);
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    boolean existsById(UUID id);
 }
