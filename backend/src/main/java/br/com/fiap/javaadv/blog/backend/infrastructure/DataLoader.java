@@ -1,28 +1,31 @@
 package br.com.fiap.javaadv.blog.backend.infrastructure;
 
 import br.com.fiap.javaadv.blog.backend.datasource.repositories.ProfileRepository;
+import br.com.fiap.javaadv.blog.backend.datasource.repositories.RoleRepository;
 import br.com.fiap.javaadv.blog.backend.datasource.repositories.UserRepository;
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.Profile;
+import br.com.fiap.javaadv.blog.backend.domainmodel.entities.Role;
 import br.com.fiap.javaadv.blog.backend.domainmodel.entities.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Configuration
 public class DataLoader {
 
     @Bean
-    CommandLineRunner initData(ProfileRepository profileRepository, UserRepository userRepository){
+    CommandLineRunner initData(ProfileRepository profileRepository,
+                               UserRepository userRepository,
+                               RoleRepository roleRepository,
+                               PasswordEncoder passwordEncoder){
         return args -> {
 
             User admin = User.builder()
                     .email("admin@gmailcom")
-                    .name("TIO FULADO")
+                    .name("TIO FULANO")
                     .password("123456789DEIZ")
                     .build();
 
@@ -49,6 +52,32 @@ public class DataLoader {
                     .build());
 
             profileRepository.saveAll(profiles);
+
+            Role role = new Role();
+            role.setName("ROLE_USER");
+
+            Role roleAdmin = new Role();
+            role.setName("ROLE_ADMIN");
+
+            roleRepository.save(role);
+            roleRepository.save(roleAdmin);
+
+            User user = new User();
+//            user.setId(UUID.randomUUID());
+            user.setName("SAMPLE USER");
+            user.setPassword( passwordEncoder.encode("admin123"));
+            user.setEmail("sampleuser@gmail.com");
+
+            user.setRoles(Set.of(role));
+
+            Profile userProfile = new Profile();
+            userProfile.setBio("SOME AWSOME FUCKIN BIO");
+            userProfile.setUser(user);
+            user.setProfile(userProfile);
+
+            userRepository.save(user);
+
+
         };
     }
 
