@@ -38,6 +38,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
+//                                        "/api/v1/profiles/",
                                         "/auth/**", //em runtime
                                         "/auth/",   //em runtime
                                         "/v3/api-docs/**", // somente em dev

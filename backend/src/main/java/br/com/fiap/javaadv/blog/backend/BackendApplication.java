@@ -23,24 +23,24 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 
 
-		Collection<User> users = new LinkedList<>();
-
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-//		users.add( new Post());
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
-
-		for( User user : users){
-			System.out.println(user);
-		}
+//		Collection<User> users = new LinkedList<>();
+//
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+////		users.add( new Post());
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//		users.add(new User(UUID.randomUUID(), "sample name", "sample_e mail", "S3kr3t", null, null, null));
+//
+//		for( User user : users){
+//			System.out.println(user);
+//		}
 
 
 

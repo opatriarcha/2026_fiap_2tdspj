@@ -35,11 +35,12 @@ public class User extends Object{
     private @Getter @Setter String email;
 
     @NotBlank(message="O password é obrigatorio")
-    @Size( min=6, message="O password deve tger ao menos 6 posicoes.")
-    @Column( name = "PASSWORD", length = 20, nullable = false)
+    @Size( min=6, message="O password deve ter ao menos 6 posicoes.")
+    @Column( name = "PASSWORD", length = 200, nullable = false)
     private @Getter @Setter String password;
 
-    @OneToOne( mappedBy = "user")
+//    @OneToOne( mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne
     private @Getter @Setter Profile profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

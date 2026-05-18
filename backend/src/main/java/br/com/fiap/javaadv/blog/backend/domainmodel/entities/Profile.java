@@ -25,7 +25,7 @@ public class Profile {
     @Column(name = "PROFILE_IMAGE_URL", length = 255)
     private @Getter @Setter String imagePath;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn( name = "user_id")
     private @Getter @Setter User user;
 

@@ -18,4 +18,10 @@ public class GlobalExceptionValidationHandler {
                 .forEach( err -> errors.put(err.getField(), err.getDefaultMessage()));
         return ResponseEntity.badRequest().body(errors);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex ){
+        ex.printStackTrace();
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
 }
