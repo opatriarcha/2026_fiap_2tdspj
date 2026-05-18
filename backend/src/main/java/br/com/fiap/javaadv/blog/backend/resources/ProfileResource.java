@@ -19,6 +19,9 @@ import java.net.URI;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 @RestController
 @RequestMapping("/api/v1/profiles")
@@ -41,6 +44,7 @@ public class ProfileResource {
 
     //HATEOAS
     @GetMapping("/find")
+    @Cacheable( value = "profilesCache")
     public ResponseEntity<List<ProfileDTO>> fetchAll(Pageable pageable){
         return ResponseEntity.ok(
                 this.profileService.fetchAll(pageable)
@@ -58,6 +62,7 @@ public class ProfileResource {
     }
 
     @PostMapping
+    @CachePut(value = "profilesCache", key="#profileDTO.id")
     public ResponseEntity<ProfileDTO> create( @Valid @RequestBody ProfileDTO profileDTO ){
         Profile profile = ProfileDTO.fromDTO(profileDTO);
         Profile savedProfile = this.profileService.create(profile);
@@ -80,6 +85,7 @@ public class ProfileResource {
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value="profilesCache", key="#id")
     public ResponseEntity<Void> deleteById(@PathVariable UUID id){
         if( this.profileService.existsById(id))
             return ResponseEntity.noContent().build();
@@ -116,6 +122,18 @@ public class ProfileResource {
 
         return ResponseEntity.ok(profiles);
 
+    }
+
+    @GetMapping("/test-cache")
+    public ResponseEntity<String> testCache(){
+        long start = System.currentTimeMillis();
+        List<Profile> profiles = this.profileService.fetchAll();
+        long end = System.currentTimeMillis();
+
+        long elapsed = end - start;
+        System.out.println("Tempo de execução: " + elapsed + " ms ({} usuários)");
+
+        return ResponseEntity.ok("Executado em " + elapsed + " ms " + profiles.size() + "usuários encontrados: "  );
     }
 
 
